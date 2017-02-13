@@ -52,46 +52,61 @@ extern void draw_square(image picture, int xmin, int ymin, int xmax, int ymax, u
 
 
 
-extern void give_moments(struct image square,int xmin,int ymin,int xmax,int ymax,int* m0,double* m1,double* m2){
+extern void give_moments(struct image picture,int xmin,int ymin,int xmax,int ymax,int* m0,double* m1,double* m2){
+   point p;
+   COORDX(p)=xmin;
+   COORDY(p)=ymin;
    int i,j;
-   if(square.dim==3){
+   if(picture.dim==3){
       *m0=(xmax-xmin)*(ymax-ymin)/3;
       m1[0]=0;
       m1[1]=0;
       m1[2]=0;
-      for(i=0;i<(xmax-xmin)/3;i++){
-        for(j=0;j<(ymax-ymin);j++){
-         m1[0]+=square.debut+j*(xmax-xmin)/3+i;
-         m1[1]+=square.debut+j*(xmax-xmin)/3+i+1;
-         m1[2]+=square.debut+j*(xmax-xmin)/3+i+2;
+      for(i=0;i<(ymax-ymin)/3;i++){
+         for(j=0;j<(xmax-xmin);j++){
+            m1[0]+=image_get_comp(picture,p,0);
+            m1[1]+=image_get_comp(picture,p,1);
+            m1[2]+=image_get_comp(picture,p,2);
+            MOVE_RIGHT_POINT(p);
          }
+         COORDX(p)=xmin;
+         MOVE_DOWN_POINT(p);
       }
       m2[0]=0;
       m2[1]=0;
       m2[2]=0;
-      for(i=0;i<(xmax-xmin)/3;i++){
-       for(j=0;j<(ymax-ymin);j++){
-         m2[0]+=(square.debut+j*(xmax-xmin)/3+i)*(square.debut+j*(xmax-xmin)/3+i);
-         m2[1]+=(square.debut+j*(xmax-xmin)/3+i+1)*(square.debut+j*(xmax-xmin)/3+i+1);
-         m2[2]+=(square.debut+j*(xmax-xmin)/3+i+2)*(square.debut+j*(xmax-xmin)/3+i+2);
+      for(i=0;i<(ymax-ymin)/3;i++){
+         for(j=0;j<(xmax-xmin);j++){
+            m2[0]+=(image_get_comp(picture,p,0))*(image_get_comp(picture,p,0));
+            m2[1]+=(image_get_comp(picture,p,1))*(image_get_comp(picture,p,1));
+            m2[2]+=(image_get_comp(picture,p,2))*(image_get_comp(picture,p,2));
+            MOVE_RIGHT_POINT(p);
          }
+         COORDX(p)=xmin;
+         MOVE_DOWN_POINT(p);
       }
+      printf("M0 = %d\nM1 = {%lf, %lf %lf}\nM2 = {%lf, %lf %lf}", *m0, m1[0], m1[1], m1[2], m2[0], m2[1], m2[2]);
    }
    else{
       *m0=(xmax-xmin)*(ymax-ymin);
       *m1=0;
-      for(i=0;i<(xmax-xmin);i++){
-         for(j=0;j<(ymax-ymin);j++){
-            *m1+=square.debut+j*(xmax-xmin)+i;
+      for(i=0;i<(ymax-ymin);i++){
+         for(j=0;j<(xmax-xmin);j++){
+            *m1+=image_get_comp(picture,p,0);
+            MOVE_RIGHT_POINT(p);
          }
+         COORDX(p)=xmin;
+         MOVE_DOWN_POINT(p);
       }
       *m2=0;
-      for(i=0;i<(xmax-xmin);i++){
-         for(j=0;j<(ymax-ymin);j++){
-            *m1+=(square.debut+j*(xmax-xmin)/3+i)*(square.debut+j*(xmax-xmin)/3+i);
+      for(i=0;i<(ymax-ymin);i++){
+         for(j=0;j<(xmax-xmin);j++){
+            *m1+=(image_get_comp(picture,p,0))*(image_get_comp(picture,p,0));
+            MOVE_RIGHT_POINT(p);
          }
+         COORDX(p)=xmin;
+         MOVE_DOWN_POINT(p);
       } 
+      printf("M0 = %d\nM1 = %lf\nM2 = %lf", *m0, *m1, *m2);
    }
 }
-
-
