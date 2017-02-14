@@ -43,8 +43,8 @@ extern quadtree create_quadtree(){
    quadtree qtree;
    *(qtree.sons)=NULL;
    qtree.M0=0;
-   qtree.M1[3]=0;
-   qtree.M2[3]=0;
+   qtree.M1[3]=0; // Pourquoi que le [3] ?
+   qtree.M2[3]=0; // De même ^^
    return qtree;
 }
 
@@ -60,7 +60,7 @@ extern quadtree create_quadtree(){
 extern void quadtree_subdivide(quadtree qtree){
    int i;
    for (i=0;i<4;i++){
-      *((*(qtree.sons[i])).sons)=NULL;
+      *((*(qtree.sons[i])).sons)=NULL; // Pourquoi ne pas utiliser la fonction juste au dessus ?
       (*(qtree.sons[i])).M0=(qtree.M0)/4;
       (*(qtree.sons[i])).M1[3]=0;
       (*(qtree.sons[i])).M2[3]=0;
@@ -78,7 +78,7 @@ extern void quadtree_subdivide(quadtree qtree){
  * @param qtree a quad tree
  */
 
-extern void delete_quadtree(quadtree qtree){
+extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
    int i;
    for (i=0;i<4;i++){
       *((*(qtree.sons[i])).sons)=NULL;
@@ -98,7 +98,7 @@ extern void delete_quadtree(quadtree qtree){
  * @return qtree a quad tree of the picture.
  */
 
-extern quadtree split_image(image picture, double sill){
+extern quadtree split_image(image picture, double sill){ // J'arrive plus a me procurer le pdf... Tu pourrais le mettre sur le GitHub stp
    var=(1/
 }
 
@@ -112,13 +112,3 @@ int main(){
    delete_quadtree(Q);
    return 0;
 }
-
-
-
-
-
-
-
-
-
-
