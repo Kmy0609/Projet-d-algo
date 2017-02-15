@@ -63,7 +63,7 @@ extern quadtree create_quadtree(){
 extern void quadtree_subdivide(quadtree qtree){
    int i;
    for (i=0;i<4;i++){
-      ((*(qtree.sons[i])).sons)=create_quadtree(); // Pourquoi ne pas utiliser la fonction juste au dessus ?
+      (*(qtree.sons[i]))=create_quadtree();
    } 
 }
 
