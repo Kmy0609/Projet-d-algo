@@ -74,14 +74,10 @@ extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
    for (i=0;i<4;i++){
       if(*((*(qtree.sons[i])).sons)!=NULL){
          delete_quadtree(*(qtree.sons[i]));
-         *((*(qtree.sons[i])).sons)=NULL;
       }
+      *((*(qtree.sons[i])).sons)=NULL;
    }
 }
-
-
-
-
 
 /**
  * A complete description of the function.
@@ -94,9 +90,6 @@ extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
 extern quadtree split_image(image picture, double sill){ // J'arrive plus a me procurer le pdf... Tu pourrais le mettre sur le GitHub stp
    var=(1/
 }
-
-
-
 
 int main(){
    quadtree Q;
