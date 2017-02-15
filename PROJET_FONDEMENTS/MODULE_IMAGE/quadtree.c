@@ -73,8 +73,8 @@ extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
    int i;
    for (i=0;i<4;i++){
       if(*((*(qtree.sons[i])).sons)!=NULL){
-         *((*(qtree.sons[i])).sons)=NULL;
          delete_quadtree(*(qtree.sons[i]));
+         *((*(qtree.sons[i])).sons)=NULL;
       }
    }
 }
