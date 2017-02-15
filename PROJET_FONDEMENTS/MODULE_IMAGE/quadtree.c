@@ -95,8 +95,7 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
    le seul contour qu'il y aurait serait celui de l'image de départ...*/
    quadtree qtree;
    qtree=create_quadtree();
-   int* m0;
-   double* m1, m2;
+   double* m0, m1, m2;
    double var;
    give_moments(picture,xmin,ymin,xmax,ymax,m0,m1,m2);
    var=((*m2)-((*m1)*(*m1))/(*m0))/(*m0));
@@ -117,7 +116,8 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
  */
 
 extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color){
-   //Ge cest pa...
+   qtree=split_image(picture,sill,0,0,picture.largeur,picture.hauteur);
+   
 }
 
 int main(){
