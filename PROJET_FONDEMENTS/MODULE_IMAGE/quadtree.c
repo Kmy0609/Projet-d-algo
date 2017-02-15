@@ -69,7 +69,7 @@ extern void quadtree_subdivide(quadtree qtree){
  * @param qtree a quad tree
  */
 
-extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
+extern void delete_quadtree(quadtree qtree){
    int i;
    for (i=0;i<4;i++){
       if(*((*(qtree.sons[i])).sons)!=NULL){
@@ -88,11 +88,6 @@ extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
  */
 
 extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax,int ymax){ 
-   /* Je pense qu'il manque des arguments... Parce que le but c'est de diviser par 4 à chaque appel
-   comme sur la figure 1(a) mais on a pas de paramètre pour la taille de l'image
-   j'ai éssayé de faire sans mais à chaque appel de la fonction (récursive)
-   les x et y min et max se remettraient à 0 et 512 donc dans tout les cas à la fin
-   le seul contour qu'il y aurait serait celui de l'image de départ...*/
    quadtree qtree;
    qtree=create_quadtree();
    double* m0, m1, m2;
@@ -107,6 +102,9 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
    }
    return qtree;
 
+   
+   
+   
 /**
  * A complete description of the function.
  * It draws the borders of the leafs of the quadtree on a chosen image.
@@ -120,6 +118,9 @@ extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color){
    
 }
 
+   
+   
+   
 int main(){
    quadtree Q;
    Q=create_quadtree();
