@@ -52,7 +52,7 @@ extern void draw_square(image picture, int xmin, int ymin, int xmax, int ymax, u
 
 
 
-extern void give_moments(struct image picture,int xmin,int ymin,int xmax,int ymax,double* m0,double* m1,double* m2){
+extern void give_moments(image picture,int xmin,int ymin,int xmax,int ymax,double* m0,double* m1,double* m2){
    int i,j,k,dim;
    unsigned char* pixel;
    dim=image_give_dim(picture);
@@ -60,7 +60,7 @@ extern void give_moments(struct image picture,int xmin,int ymin,int xmax,int yma
    *m0=(xmax-xmin)*(ymax-ymin);
    for(i=ymin;i<ymax;i++){
       for(j=xmin;j<xmax;j++){
-         image_read_pixel(self,i,j,pixel);
+         image_read_pixel(picture,i,j,pixel);
          for(k=0;k<dim;k++)){
             m1[k]+=pixel[k];
             m2[k]+=pixel[k]*(pixel[k]);
