@@ -32,7 +32,6 @@ typedef struct quadtree
    double M0, M1[3], M2[3];
 } quadtree;
 
-
 /**
  * A complete description of the function.
  * It creates a quad tree,empty for the moment.
@@ -51,9 +50,6 @@ extern quadtree create_quadtree(){
    return qtree;
 }
 
-
-
-
 /**
  * A complete description of the function.
  * It divides a quad tree in four sons.
@@ -67,11 +63,6 @@ extern void quadtree_subdivide(quadtree qtree){
    } 
 }
 
-
-
-
-
-
 /**
  * A complete description of the function.
  * It removes all a quad tree.
@@ -81,8 +72,10 @@ extern void quadtree_subdivide(quadtree qtree){
 extern void delete_quadtree(quadtree qtree){ // Pas de condition d'arret ?
    int i;
    for (i=0;i<4;i++){
-      *((*(qtree.sons[i])).sons)=NULL;
-      delete_quadtree(*(qtree.sons[i]));
+      if(*((*(qtree.sons[i])).sons)!=NULL){
+         *((*(qtree.sons[i])).sons)=NULL;
+         delete_quadtree(*(qtree.sons[i]));
+      }
    }
 }
 
