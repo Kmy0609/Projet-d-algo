@@ -101,16 +101,17 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
       }
    }
    return qtree;
+}
 
    
    
    
 /**
  * A complete description of the function.
- * It draws the borders of the leafs of the quadtree on a chosen image.
+ * It draws the borders of the leaves of the quadtree on a chosen image.
  * @param picture an image on which the quadtree in drawn.
- * @param qtree the quadtree whose leafs are to be drawn.
- * @param color the color of the border of the leafs.
+ * @param qtree the quadtree whose leaves are to be drawn.
+ * @param color the color of the border of the leaves.
  */
 
 extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color){
@@ -118,9 +119,47 @@ extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color){
    
 }
 
+
+/**
+ * A complete description of the function.
+ * It creates a quadtree whose leaves are all the same height.
+ * @param h the default height of the leaves.
+ * @return qtree the default quadtree.
+ */
+
+extern quadtree create_default_quadtree(int h){
    
+   return qtree
+}
+
+
+/**
+ * A complete description of the function.
+ * It claculates the momentums of all the nods of a quadtree from the momentums of the leaves.
+ * @param qtree a quadtree.
+ * @param picture an image.
+ */
+
+extern void init_quadtree(quadtree qtree,image picture){
    
+}
+
+
+/**
+ * A complete description of the function.
+ * It deletes every leaf whose variance is greater than the sill 
+ * and every son of a nod whose variance is lower than the sill.
+ * @param picture an image on which the quadtree in drawn.
+ * @param qtree the quadtree whose leafs are to be drawn.
+ * @param sill a limit number.
+ */
+
+extern void update_quadtree(quadtree qtree,image picture,double sill){
    
+}
+
+
+
 int main(){
    quadtree Q;
    Q=create_quadtree();
