@@ -5,7 +5,7 @@ OBJ=main.o image.o image_util.o
 OUTPUT=testimage
 
 $(OUTPUT): $(OBJ)
-	$(CC) $(OBJ) -o $@ libimage32.a 
+	$(CC) $(OBJ) -o $@ libimage64.a 
 
 clean:
 	rm -f $(OUTPUT) $(OBJ)
