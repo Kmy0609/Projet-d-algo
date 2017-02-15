@@ -108,11 +108,11 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
  */
 
 
-/*
-extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color){
-   qtree=split_image(picture,sill,0,0,picture.largeur,picture.hauteur);
-   
+extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color, double sill){
+   qtree=split_image(picture,sill,0,0,image_give_largeur(picture),image_give_hauteur(picture));
+   for (i=0;i<4;i++){
+      draw_square(picture, xmin, ymin, int xmax, int ymax, color); // Je ne sais pas quels arguments mettre pour xmin, xmax,... sachant qu'il faut que ce soit les coordonnées des noeuds des quadtrees. Mais je ne sais pas calculer la longueur d'un quadtree...
+        
 }
-*/
    
 
