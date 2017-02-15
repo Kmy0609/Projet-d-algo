@@ -98,28 +98,15 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
    int* m0;
    double* m1, m2;
    double var;
-   if (dim==1){
-      give_moments(picture,xmin,ymin,xmax,ymax,m0,m1,m2);
-      var=((*m2)-((*m1)*(*m1))/(*m0))/(*m0));
-      if(var>sill){
-         quadtree_subdivide(qtree);
-         for (i=0;i<4;i++){
-            (*(qtree.sons[i]))=split_image(picture,sill,xmin/2,ymin/2,xmax/2,ymax/2);
-         }
+   give_moments(picture,xmin,ymin,xmax,ymax,m0,m1,m2);
+   var=((*m2)-((*m1)*(*m1))/(*m0))/(*m0));
+   if(var>sill){
+      quadtree_subdivide(qtree);
+      for (i=0;i<4;i++){
+         (*(qtree.sons[i]))=split_image(picture,sill,xmin/2,ymin/2,xmax/2,ymax/2);
       }
-      return qtree;
    }
-   else{
-      give_moments(picture,xmin,ymin,xmax,ymax,m0,m1,m2);
-      var=(m2-(m1*m1)/m0)/m0);
-      if(var>sill){
-         quadtree_subdivide(qtree);
-         for (i=0;i<4;i++){
-            (*(qtree.sons[i]))=split_image(picture,sill,xmin/2,ymin/2,xmax/2,ymax/2);
-         }
-      }
-      return qtree;
-}
+   return qtree;
 
 /**
  * A complete description of the function.
