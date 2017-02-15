@@ -93,11 +93,16 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
    j'ai éssayé de faire sans mais à chaque appel de la fonction (récursive)
    les x et y min et max se remettraient à 0 et 512 donc dans tout les cas à la fin
    le seul contour qu'il y aurait serait celui de l'image de départ...*/
+   quadtree qtree;
+   qtree=create_quadtree();
    double var,m0,m1,m2;
    give_moments(picture,xmin,ymin,xmax,ymax,m0,m1,m2);
    var=(m2-(m1*m1)/m0)/m0);
    if(var>sill){
-      qtree=split_image(picture,sill,xmin/4,ymin/4,xmax/4,ymax/4);
+      quadtree_subdivide(qtree)
+      for (i=0;i<4;i++){
+         (*(qtree.sons[i]))=split_image(picture,sill,xmin/4,ymin/4,xmax/4,ymax/4);
+      }
    }
    return qtree
 }
