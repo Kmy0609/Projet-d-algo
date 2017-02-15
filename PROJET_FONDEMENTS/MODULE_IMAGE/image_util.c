@@ -52,61 +52,20 @@ extern void draw_square(image picture, int xmin, int ymin, int xmax, int ymax, u
 
 
 
-extern void give_moments(struct image picture,int xmin,int ymin,int xmax,int ymax,int* m0,double* m1,double* m2){
-   point p;
-   COORDX(p)=xmin;
-   COORDY(p)=ymin;
-   int i,j;
-   if(picture.dim==3){
-      *m0=(xmax-xmin)*(ymax-ymin)/3;
-      m1[0]=0;
-      m1[1]=0;
-      m1[2]=0;
-      for(i=0;i<(ymax-ymin)/3;i++){
-         for(j=0;j<(xmax-xmin);j++){
-            m1[0]+=image_get_comp(picture,p,0);
-            m1[1]+=image_get_comp(picture,p,1);
-            m1[2]+=image_get_comp(picture,p,2);
-            MOVE_RIGHT_POINT(p);
+extern void give_moments(struct image picture,int xmin,int ymin,int xmax,int ymax,double* m0,double* m1,double* m2){
+   int i,j,k,dim;
+   unsigned char* pixel;
+   dim=image_give_dim(picture);
+   pixel=malloc(dim*sizeof(unsigned char));
+   *m0=(xmax-xmin)*(ymax-ymin);
+   for(i=ymin;i<ymax;i++){
+      for(j=xmin;j<xmax;j++){
+         image_read_pixel(self,i,j,pixel);
+         for(k=0;k<dim;k++)){
+            m1[k]+=pixel[k];
+            m2[k]+=pixel[k]*(pixel[k]);
          }
-         COORDX(p)=xmin;
-         MOVE_DOWN_POINT(p);
       }
-      m2[0]=0;
-      m2[1]=0;
-      m2[2]=0;
-      for(i=0;i<(ymax-ymin)/3;i++){
-         for(j=0;j<(xmax-xmin);j++){
-            m2[0]+=(image_get_comp(picture,p,0))*(image_get_comp(picture,p,0));
-            m2[1]+=(image_get_comp(picture,p,1))*(image_get_comp(picture,p,1));
-            m2[2]+=(image_get_comp(picture,p,2))*(image_get_comp(picture,p,2));
-            MOVE_RIGHT_POINT(p);
-         }
-         COORDX(p)=xmin;
-         MOVE_DOWN_POINT(p);
-      }
-      printf("M0 = %d\nM1 = {%lf, %lf %lf}\nM2 = {%lf, %lf %lf}", *m0, m1[0], m1[1], m1[2], m2[0], m2[1], m2[2]);
    }
-   else{
-      *m0=(xmax-xmin)*(ymax-ymin);
-      *m1=0;
-      for(i=0;i<(ymax-ymin);i++){
-         for(j=0;j<(xmax-xmin);j++){
-            *m1+=image_get_comp(picture,p,0);
-            MOVE_RIGHT_POINT(p);
-         }
-         COORDX(p)=xmin;
-         MOVE_DOWN_POINT(p);
-      }
-      *m2=0;
-      for(i=0;i<(ymax-ymin);i++){
-         for(j=0;j<(xmax-xmin);j++){
-            *m1+=(image_get_comp(picture,p,0))*(image_get_comp(picture,p,0));
-            MOVE_RIGHT_POINT(p);
-         }
-         COORDX(p)=xmin;
-         MOVE_DOWN_POINT(p);
-      } 
-      printf("M0 = %d\nM1 = %lf\nM2 = %lf", *m0, *m1, *m2);
-   }
+   free(pixel);
 }
