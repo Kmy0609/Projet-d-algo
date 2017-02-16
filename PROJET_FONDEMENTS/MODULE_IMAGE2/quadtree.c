@@ -77,7 +77,7 @@ extern void delete_quadtree(quadtree qtree){
  * @param picture an image that the user wants to divide.
  * @param sill the sill that var has to be under.
  * @param xmin | 
- * @param ymin | -> the coordinates of a point in the picture
+ * @param ymin | -> the coordinates of a square in the picture
  * @param xmax |
  * @param ymax |
  * @return qtree a quad tree of the picture.
@@ -109,7 +109,7 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
  * @param qtree the quadtree whose leaves have to be drawn.
  * @param color the color of the border of the leaves.
  * @param xmin | 
- * @param ymin | -> the coordinates of a point in the picture
+ * @param ymin | -> the coordinates of a square in the picture
  * @param xmax |
  * @param ymax |
  */
