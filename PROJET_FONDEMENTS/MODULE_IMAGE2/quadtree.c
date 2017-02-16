@@ -150,7 +150,7 @@ extern quadtree create_default_quadtree(int h){
 
 /**
  * A complete description of the function.
- * It claculates the momentums of all the nods of a quadtree from the momentums of the leaves.
+ * It calculates the momenta of all the nodes of a quadtree from the momenta of the leaves.
  * @param qtree a quadtree.
  * @param picture an image.
  */
@@ -163,7 +163,7 @@ extern void init_quadtree(quadtree qtree,image picture){
 /**
  * A complete description of the function.
  * It deletes every leaf whose variance is greater than the sill 
- * and every son of a nod whose variance is lower than the sill.
+ * and every son of a node whose variance is lower than the sill.
  * @param picture an image on which the quadtree in drawn.
  * @param qtree the quadtree whose leafs are to be drawn.
  * @param sill a limit number.
