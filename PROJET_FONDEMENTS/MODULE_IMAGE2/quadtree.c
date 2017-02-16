@@ -23,12 +23,12 @@
 
 #include "quadtree.h"
 
-/**
- * A complete description of the function.
- * It creates a quad tree,empty for the moment.
- * @return qtree a quad tree cretaed by the function.
- */
 
+
+/**
+ * It creates a quad tree,empty for the moment.
+ * @return qtree a quad tree created by the function.
+ */
 extern quadtree create_quadtree(){
    int i;
    quadtree qtree;
@@ -41,12 +41,12 @@ extern quadtree create_quadtree(){
    return qtree;
 }
 
+
+
 /**
- * A complete description of the function.
  * It divides a quad tree in four sons.
  * @param qtree a quad tree
  */
-
 extern void quadtree_subdivide(quadtree qtree){
    int i;
    for (i=0;i<4;i++){
@@ -54,12 +54,12 @@ extern void quadtree_subdivide(quadtree qtree){
    } 
 }
 
+
+
 /**
- * A complete description of the function.
  * It removes all a quad tree.
  * @param qtree a quad tree
  */
-
 extern void delete_quadtree(quadtree qtree){
    int i;
    for (i=0;i<4;i++){
@@ -70,14 +70,18 @@ extern void delete_quadtree(quadtree qtree){
    }
 }
 
+
+
 /**
- * A complete description of the function.
  * It creates a quad tree. It cuts nodes, in order to var<sill.
  * @param picture an image that the user wants to divide.
  * @param sill the sill that var has to be under.
+ * @param xmin | 
+ * @param ymin | -> the coordinates of a point in the picture
+ * @param xmax |
+ * @param ymax |
  * @return qtree a quad tree of the picture.
  */
-
 extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax,int ymax){ 
    int i;
    quadtree qtree;
@@ -100,40 +104,50 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
    
    
 /**
- * A complete description of the function.
- * It draws the borders of the leafs of the quadtree on a chosen image.
- * @param picture an image on which the quadtree in drawn.
- * @param qtree the quadtree whose leafs are to be drawn.
- * @param color the color of the border of the leafs.
+ * It draws the borders of the leaves of the quadtree in a chosen image.
+ * @param picture an image in which the quadtree is drawn.
+ * @param qtree the quadtree whose leaves have to be drawn.
+ * @param color the color of the border of the leaves.
+ * @param xmin | 
+ * @param ymin | -> the coordinates of a point in the picture
+ * @param xmax |
+ * @param ymax |
  */
-
-
-extern void _draw_quadtree(image picture,quadtree qtree,unsigned char* color, int xmin, int ymin, int xmax, int ymax){
+extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color, int xmin, int ymin, int xmax, int ymax){
    width=(xmax-xmin)/2;
    height=(ymax-ymin)/2;
    if(qtree != NULL){
       draw_square(picture, xmin, ymin, int xmax, int ymax, color);
-      _draw_quadtree(picture, qtree->sons[0], color, xmin, ymin, xmin + width, ymin + height);
-      _draw_quadtree(picture, qtree->sons[1], color, xmin + width, ymin, xmax, ymin + height);
-      _draw_quadtree(picture, qtree->sons[2], color, xmin + width, ymin + height, xmax, ymax);
-      _draw_quadtree(picture, qtree->sons[3], color, xmin, ymin + height, xmin + width, ymax);
+      draw_quadtree(picture, qtree->sons[0], color, xmin, ymin, xmin + width, ymin + height);
+      draw_quadtree(picture, qtree->sons[1], color, xmin + width, ymin, xmax, ymin + height);
+      draw_quadtree(picture, qtree->sons[2], color, xmin + width, ymin + height, xmax, ymax);
+      draw_quadtree(picture, qtree->sons[3], color, xmin, ymin + height, xmin + width, ymax);
    }
+}
+
+   
+   
+  
+/**
+ * It creates a quadtree, with all his leaves having a height of h.
+ * @param h height of every leaf.  
+ * @return qtree a quadtree creted by this function
+ */
+extern quadtree create_default_quadtree(int h){
+   quadtree qtree;
+   int i;
+   qtree=create_quadtree();
+   if(qtree->M0>h*h){
+      quadtree_subdivide(qtree);
+      for(i=0;i<4;i++){
+         qtree.sons[i]=create_default_quadtree(h);
+      }
+   }
+   return qtree;
 }
    
    
-   
-extern quadtree create_default_quadtree(int h){
-   quadtree qtree;
-   if(h < 0){
-        return NULL;
-    }
-    qtree = create_quadtree();
-    if(h == 0){
-        return qtree;
-    }
-   
-   
-   
+   /*
 
 if(quad->sons[0]){
         init_quadtree(self, quad->sons[0], xmin, ymin, xmin + width, ymin + height);
@@ -148,3 +162,4 @@ if(quad->sons[0]){
         }
     }
 }
+*/
