@@ -108,11 +108,43 @@ extern quadtree split_image(image picture,double sill,int xmin,int ymin,int xmax
  */
 
 
-extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color, double sill){
-   qtree=split_image(picture,sill,0,0,image_give_largeur(picture),image_give_hauteur(picture));
-   for (i=0;i<4;i++){
-      draw_square(picture, xmin, ymin, int xmax, int ymax, color); // Je ne sais pas quels arguments mettre pour xmin, xmax,... sachant qu'il faut que ce soit les coordonnées des noeuds des quadtrees. Mais je ne sais pas calculer la longueur d'un quadtree...
-        
+extern void _draw_quadtree(image picture,quadtree qtree,unsigned char* color, int xmin, int ymin, int xmax, int ymax){
+   width=(xmax-xmin)/2;
+   height=(ymax-ymin)/2;
+   if(qtree != NULL){
+      draw_square(picture, xmin, ymin, int xmax, int ymax, color);
+      _draw_quadtree(picture, qtree->sons[0], color, xmin, ymin, xmin + width, ymin + height);
+      _draw_quadtree(picture, qtree->sons[1], color, xmin + width, ymin, xmax, ymin + height);
+      _draw_quadtree(picture, qtree->sons[2], color, xmin + width, ymin + height, xmax, ymax);
+      _draw_quadtree(picture, qtree->sons[3], color, xmin, ymin + height, xmin + width, ymax);
+   }
 }
    
+   
+   
+extern quadtree create_default_quadtree(int h){
+   quadtree qtree;
+   if(h < 0){
+        return NULL;
+    }
+    qtree = create_quadtree();
+    if(h == 0){
+        return qtree;
+    }
+   
+   
+   
 
+if(quad->sons[0]){
+        init_quadtree(self, quad->sons[0], xmin, ymin, xmin + width, ymin + height);
+        init_quadtree(self, quad->sons[1], xmin + width, ymin, xmax, ymin + height);
+        init_quadtree(self, quad->sons[2], xmin + width, ymin + height, xmax, ymax);
+        init_quadtree(self, quad->sons[3], xmin, ymin + height, xmin + width, ymax);
+
+        for(i = 0; i < NB_CHILD; i++){
+            quad->M0 += quad->sons[i]->M0;
+            quad->M1[0] += quad->sons[i]->M1[0];
+            quad->M2[0] += quad->sons[i]->M2[0];
+        }
+    }
+}
