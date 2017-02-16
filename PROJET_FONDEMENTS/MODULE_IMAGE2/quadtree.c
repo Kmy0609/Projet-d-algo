@@ -173,19 +173,3 @@ extern void update_quadtree(quadtree qtree,image picture,double sill){
 }
 
    
-   /*
-
-if(quad->sons[0]){
-        init_quadtree(self, quad->sons[0], xmin, ymin, xmin + width, ymin + height);
-        init_quadtree(self, quad->sons[1], xmin + width, ymin, xmax, ymin + height);
-        init_quadtree(self, quad->sons[2], xmin + width, ymin + height, xmax, ymax);
-        init_quadtree(self, quad->sons[3], xmin, ymin + height, xmin + width, ymax);
-
-        for(i = 0; i < NB_CHILD; i++){
-            quad->M0 += quad->sons[i]->M0;
-            quad->M1[0] += quad->sons[i]->M1[0];
-            quad->M2[0] += quad->sons[i]->M2[0];
-        }
-    }
-}
-*/
