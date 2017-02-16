@@ -131,7 +131,7 @@ extern void draw_quadtree(image picture,quadtree qtree,unsigned char* color, int
 /**
  * It creates a quadtree, with all his leaves having a height of h.
  * @param h height of every leaf.  
- * @return qtree a quadtree creted by this function
+ * @return qtree a quadtree created by this function
  */
 extern quadtree create_default_quadtree(int h){
    quadtree qtree;
